@@ -1,4 +1,4 @@
-import { DashboardStats } from '@/types';
+import { DashboardStats } from '@/types/dashboard';
 import { useAppSelector } from '@/store/hooks';
 import { UserRole } from '@/types/user';
 import { useState, useEffect } from 'react';

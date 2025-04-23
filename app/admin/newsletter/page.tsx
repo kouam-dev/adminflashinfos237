@@ -4,14 +4,11 @@
 import { useState, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import { 
-  FiEye, FiTrash2, FiDownload, FiUserPlus, FiUserX, FiSearch, 
-  FiMail, FiCheckCircle, FiXCircle, FiCopy, FiFilter, FiRefreshCw
-} from 'react-icons/fi';
+import { FiEye, FiTrash2, FiDownload, FiUserPlus, FiUserX, FiSearch, FiMail, FiCheckCircle, FiXCircle, FiCopy, FiFilter, FiRefreshCw } from 'react-icons/fi';
 import { newsletterService } from '@/services/firebase/newsletterService';
 import { NewsletterSubscriber } from '@/types/newsletter';
 import { useAppSelector } from '@/store/hooks';
-import { UserRole } from '@/types';
+import { UserRole } from '@/types/user';
 
 export default function NewsletterDashboard() {
   const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>([]);

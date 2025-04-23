@@ -3,11 +3,7 @@ import { useState, useEffect, Fragment } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Dialog, Transition } from '@headlessui/react';
-import { 
-  FiUser, FiMail, FiKey, FiImage, FiToggleRight, 
-  FiArrowLeft, FiSave, FiLoader, FiAlertCircle,
-  FiTwitter, FiFacebook, FiLinkedin, FiEdit3
-} from 'react-icons/fi';
+import { FiUser, FiMail, FiKey, FiImage, FiToggleRight, FiArrowLeft, FiSave, FiLoader, FiAlertCircle,FiTwitter, FiFacebook, FiLinkedin, FiEdit3 } from 'react-icons/fi';
 import { getUserById, updateUser, sendPasswordReset } from '@/services/firebase/userServices';
 import { UserRole, UserFormData } from '@/types/user';
 import { toast } from 'react-hot-toast';

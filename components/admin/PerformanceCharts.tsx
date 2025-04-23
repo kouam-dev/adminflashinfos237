@@ -4,18 +4,7 @@ import { useState, useEffect } from 'react';
 import { ViewsByDayStat, UserGrowthStat } from '@/types';
 import { useAppSelector } from '@/store/hooks';
 import { UserRole } from '@/types/user';
-import {
-  Line,
-  LineChart,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  Area,
-  AreaChart
-} from 'recharts';
+import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart} from 'recharts';
 
 interface PerformanceChartsProps {
   viewsByDay: ViewsByDayStat[];

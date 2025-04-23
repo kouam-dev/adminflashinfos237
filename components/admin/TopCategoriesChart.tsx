@@ -1,6 +1,6 @@
 "use client";
 
-import { CategoryStat } from '@/types';
+import { CategoryStat } from '@/types/dashboard';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 interface TopCategoriesChartProps {

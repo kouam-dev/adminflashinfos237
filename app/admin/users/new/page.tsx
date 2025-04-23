@@ -2,11 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { 
-  FiUser, FiMail, FiImage, FiToggleRight, 
-  FiArrowLeft, FiLoader, FiUserPlus,
-  FiTwitter, FiFacebook, FiLinkedin, FiLock
-} from 'react-icons/fi';
+import { FiUser, FiMail, FiImage, FiToggleRight, FiArrowLeft, FiLoader, FiUserPlus,FiTwitter, FiFacebook, FiLinkedin, FiLock } from 'react-icons/fi';
 import { createUser } from '@/services/firebase/userServices';
 import { UserRole, UserFormData } from '@/types/user';
 import { toast } from 'react-hot-toast';

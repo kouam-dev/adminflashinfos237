@@ -10,9 +10,9 @@ export async function POST(request: NextRequest) {
 
   try {
     // Vérification des variables d'environnement
-    if (!process.env.AWS_ACCESS_KEY_ID || 
-        !process.env.AWS_SECRET_ACCESS_KEY || 
-        !process.env.AWS_REGION || 
+    if (!process.env.AWS_ACCESS_KEY_ID_ || 
+        !process.env.AWS_SECRET_ACCESS_KEY_ || 
+        !process.env.AWS_REGION_ || 
         !process.env.S3_BUCKET_NAME) {
       console.error("Variables d'environnement AWS manquantes");
       return NextResponse.json({ 
@@ -68,10 +68,10 @@ export async function POST(request: NextRequest) {
 
     // Configuration et initialisation du client S3
     const s3Client = new S3Client({
-      region: process.env.AWS_REGION,
+      region: process.env.AWS_REGION_,
       credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID_,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY_,
       },
     });
 

@@ -1,6 +1,5 @@
 // pages/index.tsx ou app/page.tsx (selon votre structure NextJS)
 'use client';
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FiArrowRight} from 'react-icons/fi';
 import Image from 'next/image';

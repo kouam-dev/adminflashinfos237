@@ -9,7 +9,7 @@ import { articleService } from '@/services/firebase/articleService';
 import { categoryService } from '@/services/firebase/categoryService';
 import dynamic from 'next/dynamic';
 import { useAppSelector } from '@/store/hooks';
-import { UserRole } from '@/types';
+import { UserRole } from '@/types/user';
 
 // Import du Rich Text Editor avec dynamic import pour éviter les erreurs SSR
 const Editor = dynamic(() => import('@tinymce/tinymce-react').then(mod => mod.Editor), { 

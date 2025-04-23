@@ -6,11 +6,11 @@ import { Category } from '@/types/category';
 import { categoryService } from '@/services/firebase/categoryService';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Dialog, Transition, Menu } from '@headlessui/react';
+import {Transition, Menu } from '@headlessui/react';
 import { FiPlus, FiEdit2, FiTrash2, FiMoreVertical, FiEye, FiEyeOff, FiChevronDown, FiSearch, FiRefreshCw } from 'react-icons/fi';
 import { BsFilterLeft } from 'react-icons/bs';
 import { useAppSelector } from '@/store/hooks';
-import { UserRole } from '@/types';
+import { UserRole } from '@/types/user';
 import ConfirmationModal from '@/components/ConfirmationModal';
 
 
@@ -18,8 +18,6 @@ export default function CategoriesManagement() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
-  const [categoryToDelete, setCategoryToDelete] = useState<Category | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filterActive, setFilterActive] = useState<string>('all'); // 'all', 'active', 'inactive'
   const { user } = useAppSelector((state) => state.auth);
@@ -103,20 +101,6 @@ export default function CategoriesManagement() {
         }
       }
     });
-  };
-
-  const handleDelete = async () => {
-    if (!categoryToDelete) return;
-    
-    try {
-      await categoryService.deleteCategory(categoryToDelete.id);
-      fetchCategories();
-      setIsDeleteModalOpen(false);
-      setCategoryToDelete(null);
-    } catch (err) {
-      setError("Erreur lors de la suppression de la catégorie.");
-      console.error('Error deleting category:', err);
-    }
   };
 
   const filteredCategories = categories
