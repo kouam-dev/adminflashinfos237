@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from 'react';
 import { getDashboardStats } from '@/services/firebase/dashboardService';
-import { DashboardStats } from '@/types';
+import { DashboardStats } from '@/types/dashboard';
 import StatsCards from '@/components/admin/StatsCards';
 import RecentArticlesTable from '@/components/admin/RecentArticlesTable';
 import PerformanceCharts from '@/components/admin/PerformanceCharts';

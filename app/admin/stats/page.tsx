@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { getDashboardStats } from '@/services/firebase/dashboardService';
-import { DashboardStats } from '@/types';
+import { DashboardStats } from '@/types/dashboard';
 import { PieChart, Pie, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Tab } from '@headlessui/react';
 import { FiArrowDown, FiArrowUp, FiCalendar, FiEye, FiTag } from 'react-icons/fi';

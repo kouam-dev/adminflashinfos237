@@ -1,4 +1,4 @@
-import { ArticleStat } from '@/types';
+import { ArticleStat } from '@/types/dashboard';
 
 interface RecentArticlesTableProps {
   articles: ArticleStat[];

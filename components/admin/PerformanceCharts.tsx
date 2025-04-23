@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { ViewsByDayStat, UserGrowthStat } from '@/types';
+import { ViewsByDayStat, UserGrowthStat } from '@/types/dashboard';
 import { useAppSelector } from '@/store/hooks';
 import { UserRole } from '@/types/user';
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart} from 'recharts';

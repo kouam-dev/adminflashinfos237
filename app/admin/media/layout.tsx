@@ -2,8 +2,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Upload S3 App',
-  description: 'Application de test pour upload des images vers AWS S3',
+  title: 'Upload Images',
+  description: "Page pour upload des images dans l'application.",
 };
 
 export default function RootLayout({
