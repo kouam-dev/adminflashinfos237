@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ReduxProvider from "@/providers/ReduxProviders";
+import ConnectionStatus from '@/components/ConnectionStatus ';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "espace d'administration flashinfos237",
+  description: "Espace d'administration de FlashInfos237",
 };
 
 export default function RootLayout({
@@ -24,9 +26,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-    <body>
-      {children}
-    </body>
-  </html>
+      {/* <ReduxProvider> */}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ConnectionStatus />
+        {children}
+      </body>
+      {/* </ReduxProvider> */}
+    </html>
   );
 }
