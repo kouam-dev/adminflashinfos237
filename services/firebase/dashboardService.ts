@@ -2,7 +2,7 @@
 // dashboardService.ts - Modifier la signature de la fonction
 import { collection, query, where, getDocs, orderBy, limit, Timestamp } from 'firebase/firestore';
 import { db } from '@/config/firebase';
-import { DashboardStats, CategoryStat, ArticleStat, UserGrowthStat, ViewsByDayStat } from '@/types';
+import { DashboardStats, CategoryStat, ArticleStat, UserGrowthStat, ViewsByDayStat } from '@/types/dashboard';
 
 // Modifier la signature pour accepter les dates de début et de fin
 export const getDashboardStats = async (
