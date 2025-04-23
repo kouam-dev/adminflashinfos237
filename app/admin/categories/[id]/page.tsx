@@ -239,7 +239,7 @@ export default function EditCategory() {
                   id="active"
                   name="active"
                   checked={formData.active}
-                  onChange={handleChange as any}
+                  onChange={handleChange}
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
                 <label className="ml-2 block text-gray-700 text-sm font-bold" htmlFor="active">

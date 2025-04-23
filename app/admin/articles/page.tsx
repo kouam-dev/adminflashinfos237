@@ -54,7 +54,7 @@ const AdminArticlesPage = () => {
       // Fallback si aucun rôle n'est défini ou reconnu
       return (
         <div className="text-center py-10">
-          <p className="text-gray-600">Vous n'avez pas les droits nécessaires pour consulter les articles.</p>
+          <p className="text-gray-600">Vous n&apos;avez pas les droits nécessaires pour consulter les articles.</p>
         </div>
       );
     }

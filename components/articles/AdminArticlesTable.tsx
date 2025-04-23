@@ -1,12 +1,12 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { FiEye, FiEdit2, FiTrash2, FiImage, FiStar, FiMoreVertical, FiFilter } from 'react-icons/fi';
+import { FiEye, FiEdit2, FiTrash2, FiImage, FiStar, FiMoreVertical} from 'react-icons/fi';
 import { Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Article, ArticleStatus } from '@/types/article';
-import { User, UserRole } from '@/types/user';
+import { User } from '@/types/user';
 import { articleService } from '@/services/firebase/articleService';
 import { getUserById, getAllUsers } from '@/services/firebase/userServices';
 import { formatDate } from '@/utils/helpers';

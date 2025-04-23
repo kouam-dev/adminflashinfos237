@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
         success: true,
         imageUrl,
       });
-    } catch (uploadError: any) {
+    } catch (uploadError: Error | any) {
       console.error("Erreur d'upload S3 détaillée:", {
         message: uploadError.message,
         code: uploadError.code,
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
         error: uploadError.message || "Erreur inconnue"
       }, { status: 500 });
     }
-  } catch (error: any) {
+  } catch (error: Error | any) {
     console.error('Erreur générale:', error);
     return NextResponse.json({
       message: 'Erreur serveur lors du traitement de la requête',

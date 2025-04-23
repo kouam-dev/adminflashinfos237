@@ -6,6 +6,7 @@ import { FiUser, FiMail, FiImage, FiToggleRight, FiArrowLeft, FiLoader, FiUserPl
 import { createUser } from '@/services/firebase/userServices';
 import { UserRole, UserFormData } from '@/types/user';
 import { toast } from 'react-hot-toast';
+import Image from 'next/image';
 
 const NewUserPage = () => {
   const router = useRouter();
@@ -67,7 +68,7 @@ const NewUserPage = () => {
       await createUser(userData);
       toast.success('Utilisateur créé avec succès');
       router.push('/admin/users');
-    } catch (error: any) {
+    } catch (error: Error | any) {
       toast.error(error.message || 'Erreur lors de la création de l\'utilisateur');
       console.error('Error creating user:', error);
     } finally {
@@ -273,9 +274,11 @@ const NewUserPage = () => {
                   />
                   {userData.photoURL && (
                     <div className="mt-2 flex items-center">
-                      <img 
+                      <Image 
                         src={userData.photoURL} 
                         alt="Aperçu" 
+                        width={48}
+                        height={48}
                         className="h-12 w-12 rounded-full object-cover border border-gray-200"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;

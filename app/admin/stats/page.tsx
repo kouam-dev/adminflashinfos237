@@ -61,25 +61,25 @@ export default function DashboardPage() {
     );
   }
 
-  const formatChangeIndicator = (value: number) => {
-    if (value > 0) {
-      return (
-        <span className="flex items-center text-green-500">
-          <FiArrowUp className="h-4 w-4 mr-1" />
-          {value}%
-        </span>
-      );
-    } else if (value < 0) {
-      return (
-        <span className="flex items-center text-red-500">
-          <FiArrowDown className="h-4 w-4 mr-1" />
-          {Math.abs(value)}%
-        </span>
-      );
-    } else {
-      return <span className="text-gray-500">0%</span>;
-    }
-  };
+  // const formatChangeIndicator = (value: number) => {
+  //   if (value > 0) {
+  //     return (
+  //       <span className="flex items-center text-green-500">
+  //         <FiArrowUp className="h-4 w-4 mr-1" />
+  //         {value}%
+  //       </span>
+  //     );
+  //   } else if (value < 0) {
+  //     return (
+  //       <span className="flex items-center text-red-500">
+  //         <FiArrowDown className="h-4 w-4 mr-1" />
+  //         {Math.abs(value)}%
+  //       </span>
+  //     );
+  //   } else {
+  //     return <span className="text-gray-500">0%</span>;
+  //   }
+  // };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -123,7 +123,7 @@ export default function DashboardPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
                 <span>
-                    La catégorie "{stats.topCategories[0]?.name || 'principale'}" représente {
+                    La catégorie &quot;{stats.topCategories[0]?.name || 'principale'}&quot; représente {
                     stats.topCategories[0]
                         ? ((stats.topCategories[0].count / stats.totalArticles) * 100).toFixed(0)
                         : 0
@@ -134,7 +134,7 @@ export default function DashboardPage() {
             </div>
             
             <div>
-            <h3 className="text-lg font-medium mb-2">Points d'attention</h3>
+            <h3 className="text-lg font-medium mb-2">Points d&apos;attention</h3>
             <ul className="space-y-1">
                 <li className="flex items-start">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1 text-yellow-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -159,7 +159,7 @@ export default function DashboardPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
                 <span>
-                    Le taux de rebond est supérieur à l'objectif (45% vs 40%)
+                    Le taux de rebond est supérieur à l&apos;objectif (45% vs 40%)
                 </span>
                 </li>
             </ul>
@@ -174,7 +174,7 @@ export default function DashboardPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span>
-                Envisager de créer plus de contenu dans la catégorie "{stats.topCategories[0]?.name || 'principale'}" qui génère le plus d'engagement
+                Envisager de créer plus de contenu dans la catégorie &quot;{stats.topCategories[0]?.name || 'principale'}&quot; qui génère le plus d&apos;engagement
                 </span>
             </li>
             <li className="flex items-start">
@@ -182,7 +182,7 @@ export default function DashboardPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span>
-                Tester différentes longueurs d'articles pour optimiser l'engagement des lecteurs
+                Tester différentes longueurs d&apos;articles pour optimiser l&apos;engagement des lecteurs
                 </span>
             </li>
             <li className="flex items-start">
@@ -287,7 +287,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="ml-3">
                     <p className="text-sm text-blue-700">
-                    <span className="font-medium">4 éditeurs</span> n'ont pas publié depuis 14 jours
+                    <span className="font-medium">4 éditeurs</span> n&apos;ont pas publié depuis 14 jours
                     </p>
                 </div>
                 </div>
@@ -386,7 +386,7 @@ export default function DashboardPage() {
 
       {/* Ajouter cette section après les graphiques existants */}
         <div className="bg-white p-6 rounded-lg shadow mb-8">
-        <h2 className="text-xl font-semibold mb-4">Analyse d'engagement</h2>
+        <h2 className="text-xl font-semibold mb-4">Analyse d&apos;engagement</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Taux d'engagement */}
@@ -466,7 +466,7 @@ export default function DashboardPage() {
 
         {/* Analyse du contenu */}
         <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">Performance par longueur d'article</h2>
+            <h2 className="text-xl font-semibold mb-4">Performance par longueur d&apos;article</h2>
             <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart
@@ -504,7 +504,7 @@ export default function DashboardPage() {
                 <tr className="border-b">
                   <th className="text-left py-3 px-4">Titre</th>
                   <th className="text-right py-3 px-4">Vues</th>
-                  <th className="text-right py-3 px-4">J'aime</th>
+                  <th className="text-right py-3 px-4">J&apos;aime</th>
                   <th className="text-right py-3 px-4">Commentaires</th>
                 </tr>
               </thead>

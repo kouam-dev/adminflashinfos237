@@ -16,7 +16,7 @@ export default function RecentArticlesTable({ articles }: RecentArticlesTablePro
       </svg>
       <p className="text-gray-500 text-sm font-medium">Aucun article récent à afficher</p>
       <p className="text-gray-400 text-xs mt-1">
-        Les articles récents apparaîtront ici lorsqu'ils seront disponibles
+        Les articles récents apparaîtront ici lorsqu&apos;ils seront disponibles
       </p>
     </div>
   );

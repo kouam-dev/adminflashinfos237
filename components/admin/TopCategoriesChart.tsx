@@ -34,13 +34,13 @@ export default function TopCategoriesChart({ categories }: TopCategoriesChartPro
       </svg>
       <p className="text-gray-500 text-sm">Pas de données de catégories disponibles</p>
       <p className="text-gray-400 text-xs mt-1">
-        Aucune catégorie n'a encore été consultée
+        Aucune catégorie n&apos;a encore été consultée
       </p>
     </div>
   );
 
   // Fonction de rendu personnalisée pour les étiquettes
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index, name }: any) => {
+  const renderCustomizedLabel = ({ cx, cy, midAngle, outerRadius, percent, index, name }: { cx: number; cy: number; midAngle: number; outerRadius: number; percent: number; index: number; name: string; }) => {
     const RADIAN = Math.PI / 180;
     // Position du texte à l'extérieur de l'arc
     const radius = outerRadius * 1.15;
@@ -51,11 +51,11 @@ export default function TopCategoriesChart({ categories }: TopCategoriesChartPro
     if (percent < 0.05) return null;
 
     return (
-      <text 
-        x={x} 
-        y={y} 
-        fill={COLORS[index % COLORS.length]} 
-        textAnchor={x > cx ? 'start' : 'end'} 
+      <text
+        x={x}
+        y={y}
+        fill={COLORS[index % COLORS.length]}
+        textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline="central"
         fontSize={12}
         fontWeight={500}

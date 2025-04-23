@@ -187,7 +187,7 @@ export default function NewCategory() {
                           />
                         </div>
                         <p className="mt-1 text-xs text-gray-500">
-                          L'ordre détermine la position de la catégorie dans les listes
+                          L&apos;ordre détermine la position de la catégorie dans les listes
                         </p>
                       </div>
 
@@ -340,7 +340,7 @@ export default function NewCategory() {
                               name="active"
                               type="checkbox"
                               checked={formData.active}
-                              onChange={handleChange as any}
+                              onChange={handleChange}
                               className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                             />
                           </div>

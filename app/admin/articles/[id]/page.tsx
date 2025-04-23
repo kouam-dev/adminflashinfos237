@@ -10,6 +10,7 @@ import { categoryService } from '@/services/firebase/categoryService';
 import dynamic from 'next/dynamic';
 import { useAppSelector } from '@/store/hooks';
 import { UserRole } from '@/types/user';
+import Image from 'next/image';
 
 // Import du Rich Text Editor avec dynamic import pour éviter les erreurs SSR
 const Editor = dynamic(() => import('@tinymce/tinymce-react').then(mod => mod.Editor), { 
@@ -223,7 +224,7 @@ const ArticleForm = () => {
       
       const data = await response.json();
       return data.imageUrl;
-    } catch (err: any) {
+        } catch (err: Error | any) {
       console.error('Erreur lors de l\'upload de l\'image:', err);
       throw new Error(err.message || 'Une erreur est survenue lors de l\'upload de l\'image');
     }
@@ -264,7 +265,7 @@ const ArticleForm = () => {
       if (imageFile) {
         try {
           imageUrl = await uploadImageToS3(imageFile);
-        } catch (imgError: any) {
+        } catch (imgError: Error | any) {
           setError(`Erreur lors de l'upload de l'image: ${imgError.message}`);
           setSaving(false);
           return;
@@ -430,9 +431,11 @@ const ArticleForm = () => {
             </div>
             {imagePreview && (
               <div className="mt-2">
-                <img
+                <Image
                   src={imagePreview}
                   alt="Aperçu"
+                  width={100}
+                  height={100}
                   className="w-full max-h-48 object-cover rounded"
                 />
               </div>

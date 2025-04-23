@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image';
 import { useState, ChangeEvent } from 'react';
 
 export default function TestUpload() {
@@ -60,7 +61,7 @@ export default function TestUpload() {
       setImageUrl(data.imageUrl);
       setSuccess(true);
       
-    } catch (err: any) {
+    } catch (err: Error | any) {
       console.error('Erreur:', err);
       setError(err.message || 'Une erreur est survenue');
       setSuccess(false);
@@ -88,7 +89,7 @@ export default function TestUpload() {
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold text-center mb-6">Test d'upload vers AWS S3</h1>
+        <h1 className="text-2xl font-bold text-center mb-6">Test d&apos;upload vers AWS S3</h1>
         
         <div className="space-y-4">
           {/* Input pour sélectionner un fichier */}
@@ -139,9 +140,11 @@ export default function TestUpload() {
               <p className="text-green-700 font-medium mb-2">Upload réussi!</p>
               
               <div className="mb-3">
-                <img 
+                <Image 
                   src={imageUrl}
                   alt="Image uploadée" 
+                  width={300}
+                  height={300}
                   className="w-full h-auto max-h-64 object-contain border rounded" 
                 />
               </div>

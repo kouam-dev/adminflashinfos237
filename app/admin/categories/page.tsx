@@ -136,7 +136,7 @@ export default function CategoriesManagement() {
                 Gestion des Catégories
               </h1>
               <p className="mt-1 text-sm text-gray-500">
-                Gérez les catégories d'articles de votre site
+                Gérez les catégories d&apos;articles de votre site
               </p>
             </div>
             <div className="mt-4 flex md:mt-0 md:ml-4">

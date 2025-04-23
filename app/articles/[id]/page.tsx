@@ -6,7 +6,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import './articleContent.css'
-import { FiCalendar, FiUser, FiEye, FiMessageSquare, FiArrowLeft, FiThumbsUp } from 'react-icons/fi';
+import { FiCalendar, FiUser, FiEye, FiMessageSquare, FiArrowLeft } from 'react-icons/fi';
 import { articleService } from '@/services/firebase/articleService';
 import { CommentService } from '@/services/firebase/commentService';
 import { categoryService } from '@/services/firebase/categoryService';
@@ -64,17 +64,8 @@ export default function ArticleDetailPage() {
           })
         );
         setCategories(articleCategories.filter((category): category is Category => category !== null));
-        
-        // Récupérer les articles similaires (même catégorie)
-        if (foundArticle.categoryIds.length > 0) {
-          const { articles: related } = await articleService.getArticles({
-            status: ArticleStatus.PUBLISHED,
-            categoryId: foundArticle.categoryIds[0],
-            limit: 3
-          });
-          
-        }
-      } catch (err) {
+
+      } catch (err: Error | any) {
         console.error('Error fetching article data:', err);
         setError('Une erreur est survenue lors du chargement des données');
       } finally {

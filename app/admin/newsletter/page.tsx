@@ -268,7 +268,7 @@ export default function NewsletterDashboard() {
                       Email
                     </th>
                     <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
-                      Date d'inscription
+                      Date d&apos;inscription
                     </th>
                     <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
                       Dernière mise à jour
@@ -356,7 +356,7 @@ export default function NewsletterDashboard() {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <div className="flex items-center justify-between mb-4">
                     <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                      Détails de l'abonné
+                      Détails de l&apos;abonné
                     </Dialog.Title>
                     <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
                       selectedSubscriber?.active 
@@ -392,7 +392,7 @@ export default function NewsletterDashboard() {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-medium text-gray-500">Date d'inscription</label>
+                        <label className="block text-xs font-medium text-gray-500">Date d&apos;inscription</label>
                         <div className="mt-1">
                           <span className="text-sm">
                             {selectedSubscriber?.createdAt && formatDate(selectedSubscriber.createdAt)}
@@ -662,7 +662,7 @@ export default function NewsletterDashboard() {
                       </p>
                     )}
                     <p className="mt-2 text-xs text-gray-500">
-                      L'abonné recevra automatiquement un email de confirmation.
+                      L&apos;abonné recevra automatiquement un email de confirmation.
                     </p>
                   </div>
 

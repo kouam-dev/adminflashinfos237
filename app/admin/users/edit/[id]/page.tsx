@@ -7,6 +7,7 @@ import { FiUser, FiMail, FiKey, FiImage, FiToggleRight, FiArrowLeft, FiSave, FiL
 import { getUserById, updateUser, sendPasswordReset } from '@/services/firebase/userServices';
 import { UserRole, UserFormData } from '@/types/user';
 import { toast } from 'react-hot-toast';
+import Image from 'next/image';
 
 const EditUserPage = () => {
   const router = useRouter();
@@ -101,7 +102,7 @@ const EditUserPage = () => {
       setIsSendingReset(true);
       await sendPasswordReset(userData.email);
       toast.success('Email de réinitialisation envoyé avec succès');
-    } catch (error: any) {
+    } catch (error: Error | any) {
       toast.error(error.message || 'Erreur lors de l\'envoi de l\'email de réinitialisation');
       console.error(error);
     } finally {
@@ -126,7 +127,7 @@ const EditUserPage = () => {
       await updateUser(userId, userData);
       toast.success('Utilisateur mis à jour avec succès');
       router.push('/admin/users');
-    } catch (error: any) {
+    } catch (error:Error | any) {
       toast.error(error.message || 'Erreur lors de la mise à jour de l\'utilisateur');
       console.error('Error updating user:', error);
     } finally {
@@ -329,9 +330,11 @@ const EditUserPage = () => {
                   />
                   {userData.photoURL && (
                     <div className="mt-2 flex items-center">
-                      <img 
+                      <Image  
                         src={userData.photoURL} 
                         alt={userData.displayName} 
+                        width={48}
+                        height={48}
                         className="h-12 w-12 rounded-full object-cover border border-gray-200"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
@@ -439,7 +442,7 @@ const EditUserPage = () => {
                   ) : (
                     <>
                       <FiSave className="h-5 w-5 mr-2" />
-                      Mettre à jour l'utilisateur
+                      Mettre à jour l&apos;utilisateur
                     </>
                   )}
                 </button>
