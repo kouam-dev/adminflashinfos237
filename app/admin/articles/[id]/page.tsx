@@ -224,9 +224,10 @@ const ArticleForm = () => {
       
       const data = await response.json();
       return data.imageUrl;
-        } catch (err: Error | any) {
+        } catch (err: unknown) {
       console.error('Erreur lors de l\'upload de l\'image:', err);
-      throw new Error(err.message || 'Une erreur est survenue lors de l\'upload de l\'image');
+      const errorMessage = err instanceof Error ? err.message : 'Une erreur est survenue lors de l\'upload de l\'image';
+      throw new Error(errorMessage);
     }
   };
 
@@ -265,8 +266,8 @@ const ArticleForm = () => {
       if (imageFile) {
         try {
           imageUrl = await uploadImageToS3(imageFile);
-        } catch (imgError: Error | any) {
-          setError(`Erreur lors de l'upload de l'image: ${imgError.message}`);
+        } catch (imgError: unknown) {
+          setError(`Erreur lors de l'upload de l'image: ${imgError instanceof Error ? imgError.message : 'Erreur inconnue'}`);
           setSaving(false);
           return;
         }

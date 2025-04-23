@@ -11,7 +11,7 @@ import { articleService } from '@/services/firebase/articleService';
 import { CommentService } from '@/services/firebase/commentService';
 import { categoryService } from '@/services/firebase/categoryService';
 import { formatDate } from '@/utils/helpers';
-import { Article, ArticleStatus } from '@/types/article';
+import { Article } from '@/types/article';
 import { Comment as CommentType, CommentStatus } from '@/types/comment';
 import { Category } from '@/types/category';
 import Loader from '@/components/loader';
@@ -65,7 +65,7 @@ export default function ArticleDetailPage() {
         );
         setCategories(articleCategories.filter((category): category is Category => category !== null));
 
-      } catch (err: Error | any) {
+      } catch (err: unknown) {
         console.error('Error fetching article data:', err);
         setError('Une erreur est survenue lors du chargement des données');
       } finally {

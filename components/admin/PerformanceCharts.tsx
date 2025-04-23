@@ -10,15 +10,13 @@ interface PerformanceChartsProps {
   viewsByDay: ViewsByDayStat[];
   userGrowth: UserGrowthStat[];
 }
+
 // Créer un type qui peut gérer les deux structures de données
 interface ChartDataItem {
   date: string;
   views?: number;  // Optionnel pour les données utilisateur
   count?: number;  // Optionnel pour les données de vues
 }
-
-// Puis utilisez ce type pour chartData
-const [chartData, setChartData] = useState<ChartDataItem[]>([]);
 
 export default function PerformanceCharts({ viewsByDay, userGrowth }: PerformanceChartsProps) {
   // Récupérer le rôle de l'utilisateur connecté depuis le state Redux

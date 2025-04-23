@@ -391,7 +391,7 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Taux d'engagement */}
             <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-lg font-medium mb-2">Taux d'engagement moyen</h3>
+            <h3 className="text-lg font-medium mb-2">Taux d&apos;engagement moyen</h3>
             <div className="flex justify-between items-end">
                 <div>
                 <p className="text-3xl font-bold text-indigo-600">

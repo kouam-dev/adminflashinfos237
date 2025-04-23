@@ -68,9 +68,8 @@ const NewUserPage = () => {
       await createUser(userData);
       toast.success('Utilisateur créé avec succès');
       router.push('/admin/users');
-    } catch (error: Error | any) {
-      toast.error(error.message || 'Erreur lors de la création de l\'utilisateur');
-      console.error('Error creating user:', error);
+    } catch (error: unknown) {
+      toast.error(error instanceof Error && error.message || 'Erreur lors de la création de l\'utilisateur');
     } finally {
       setIsSubmitting(false);
     }

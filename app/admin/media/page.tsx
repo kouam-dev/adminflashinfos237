@@ -61,9 +61,8 @@ export default function TestUpload() {
       setImageUrl(data.imageUrl);
       setSuccess(true);
       
-    } catch (err: Error | any) {
-      console.error('Erreur:', err);
-      setError(err.message || 'Une erreur est survenue');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Erreur inconnue');
       setSuccess(false);
     } finally {
       setIsUploading(false);

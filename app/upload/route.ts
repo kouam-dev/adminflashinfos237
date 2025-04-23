@@ -102,23 +102,22 @@ export async function POST(request: NextRequest) {
         success: true,
         imageUrl,
       });
-    } catch (uploadError: Error | any) {
-      console.error("Erreur d'upload S3 détaillée:", {
-        message: uploadError.message,
-        code: uploadError.code,
-        name: uploadError.name
-      });
+    } catch (uploadError: unknown) {
+      // console.error("Erreur d'upload S3 détaillée:", {
+      //   message: uploadError.message,
+      //   code: uploadError.code,
+      //   name: uploadError.name
+      // });
       
       return NextResponse.json({
         message: "Erreur lors de l'upload vers S3",
-        error: uploadError.message || "Erreur inconnue"
+        error: uploadError instanceof Error && uploadError.message || "Erreur inconnue"
       }, { status: 500 });
     }
-  } catch (error: Error | any) {
-    console.error('Erreur générale:', error);
+  } catch (error: unknown) {
     return NextResponse.json({
       message: 'Erreur serveur lors du traitement de la requête',
-      error: error.message || "Erreur inconnue"
+      error: error instanceof Error && error.message || "Erreur inconnue"
     }, { status: 500 });
   }
 }

@@ -102,8 +102,9 @@ const EditUserPage = () => {
       setIsSendingReset(true);
       await sendPasswordReset(userData.email);
       toast.success('Email de réinitialisation envoyé avec succès');
-    } catch (error: Error | any) {
-      toast.error(error.message || 'Erreur lors de l\'envoi de l\'email de réinitialisation');
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Erreur lors de l\'envoi de l\'email de réinitialisation';
+      toast.error(errorMessage);
       console.error(error);
     } finally {
       setIsSendingReset(false);
@@ -127,8 +128,9 @@ const EditUserPage = () => {
       await updateUser(userId, userData);
       toast.success('Utilisateur mis à jour avec succès');
       router.push('/admin/users');
-    } catch (error:Error | any) {
-      toast.error(error.message || 'Erreur lors de la mise à jour de l\'utilisateur');
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Erreur lors de la mise à jour de l\'utilisateur';
+      toast.error(errorMessage);
       console.error('Error updating user:', error);
     } finally {
       setIsSubmitting(false);
