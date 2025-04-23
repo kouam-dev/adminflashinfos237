@@ -1,7 +1,12 @@
 {
   "name": "adminflashinfos237",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "private": true,
+  "description": "Panneau d'administration pour le site d'actualités FlashInfos237",
+  "author": {
+    "name": "Kouam Parfait J",
+    "email": "juniorparfaitkouam@gmail.com"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
