@@ -95,7 +95,7 @@ export async function POST(request: NextRequest) {
       console.log("Upload S3 réussi!");
       
       // Construction de l'URL
-      const imageUrl = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`;
+      const imageUrl = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION_}.amazonaws.com/${fileName}`;
       
       // Retourner le succès
       return NextResponse.json({
@@ -103,11 +103,11 @@ export async function POST(request: NextRequest) {
         imageUrl,
       });
     } catch (uploadError: unknown) {
-      // console.error("Erreur d'upload S3 détaillée:", {
-      //   message: uploadError.message,
-      //   code: uploadError.code,
-      //   name: uploadError.name
-      // });
+      console.error("Erreur d'upload S3 détaillée:", {
+        message: uploadError instanceof Error && uploadError.message,
+        code: uploadError instanceof Error &&  uploadError.cause,
+        name: uploadError instanceof Error && uploadError.name
+      });
       
       return NextResponse.json({
         message: "Erreur lors de l'upload vers S3",
