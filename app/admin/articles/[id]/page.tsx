@@ -372,7 +372,7 @@ const ArticleForm = () => {
           </label>
           {typeof window !== 'undefined' && (
             <Editor
-              apiKey="olnmeh37njortzmjryeh4ofvfyg2ydhbqi1t4bldjqz2s81j"
+              apiKey="zyplyet1zwiwn54gr5yer08dztutwgyrt6t3rzqva9trxvjz"
               onInit={(evt, editor) => editorRef.current = editor}
               // initialValue={formData.content}
               value={formData.content}
