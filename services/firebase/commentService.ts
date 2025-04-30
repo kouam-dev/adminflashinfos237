@@ -1,5 +1,5 @@
 // services/firebase/commentService.ts
-import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc, query, where, orderBy, Timestamp, increment } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc, query, where, orderBy, Timestamp, increment, runTransaction } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 import { Comment, CommentStatus } from '@/types/comment';
 
@@ -168,6 +168,18 @@ export const CommentService = {
   deleteComment: async (id: string): Promise<void> => {
     try {
       const commentRef = doc(db, COMMENTS_COLLECTION, id);
+      
+      // Vérifier si le commentaire était approuvé avant de le supprimer
+      const comment = await CommentService.getCommentById(id);
+      if (comment && comment.status === CommentStatus.APPROVED) {
+        // Décrémenter le compteur de commentaires de l'article
+        const articleRef = doc(db, ARTICLES_COLLECTION, comment.articleId);
+        await updateDoc(articleRef, {
+          commentCount: increment(-1),
+          updatedAt: Timestamp.now()
+        });
+      }
+      
       await deleteDoc(commentRef);
     } catch (error) {
       console.error(`Error deleting comment ${id}:`, error);
@@ -178,20 +190,35 @@ export const CommentService = {
   // Approuver un commentaire
   approveComment: async (id: string): Promise<void> => {
     try {
-      // Récupérer le commentaire pour obtenir l'articleId
-      const comment = await CommentService.getCommentById(id);
-      if (!comment) {
-        throw new Error(`Comment with ID ${id} not found`);
-      }
-
-      // Mettre à jour le statut du commentaire
-      await CommentService.updateCommentStatus(id, CommentStatus.APPROVED);
-      
-      // Incrémenter le nombre de commentaires de l'article
-      const articleRef = doc(db, ARTICLES_COLLECTION, comment.articleId);
-      await updateDoc(articleRef, {
-        commentCount: increment(1),
-        updatedAt: Timestamp.now()
+      // Utiliser une transaction pour garantir la cohérence
+      await runTransaction(db, async (transaction) => {
+        // Obtenir le commentaire
+        const commentRef = doc(db, COMMENTS_COLLECTION, id);
+        const commentDoc = await transaction.get(commentRef);
+        
+        if (!commentDoc.exists()) {
+          throw new Error(`Comment with ID ${id} not found`);
+        }
+        
+        const comment = commentDoc.data() as Comment;
+        
+        // Ne pas compter un commentaire déjà approuvé
+        if (comment.status === CommentStatus.APPROVED) {
+          return;
+        }
+        
+        // Mettre à jour le statut du commentaire dans la transaction
+        transaction.update(commentRef, {
+          status: CommentStatus.APPROVED,
+          updatedAt: Timestamp.now()
+        });
+        
+        // Incrémenter le compteur de commentaires de l'article
+        const articleRef = doc(db, ARTICLES_COLLECTION, comment.articleId);
+        transaction.update(articleRef, {
+          commentCount: increment(1),
+          updatedAt: Timestamp.now()
+        });
       });
     } catch (error) {
       console.error(`Error approving comment ${id}:`, error);
@@ -201,7 +228,28 @@ export const CommentService = {
 
   // Rejeter un commentaire
   rejectComment: async (id: string): Promise<void> => {
-    return CommentService.updateCommentStatus(id, CommentStatus.REJECTED);
+    try {
+      // Récupérer le commentaire pour vérifier son statut actuel
+      const comment = await CommentService.getCommentById(id);
+      if (!comment) {
+        throw new Error(`Comment with ID ${id} not found`);
+      }
+      
+      // Si le commentaire était approuvé, décrémenter le compteur de l'article
+      if (comment.status === CommentStatus.APPROVED) {
+        const articleRef = doc(db, ARTICLES_COLLECTION, comment.articleId);
+        await updateDoc(articleRef, {
+          commentCount: increment(-1),
+          updatedAt: Timestamp.now()
+        });
+      }
+      
+      // Mettre à jour le statut du commentaire
+      await CommentService.updateCommentStatus(id, CommentStatus.REJECTED);
+    } catch (error) {
+      console.error(`Error rejecting comment ${id}:`, error);
+      throw error;
+    }
   }
 };
 
