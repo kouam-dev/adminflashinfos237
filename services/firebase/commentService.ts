@@ -1,9 +1,10 @@
 // services/firebase/commentService.ts
-import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc, query, where, orderBy, Timestamp } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc, query, where, orderBy, Timestamp, increment } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 import { Comment, CommentStatus } from '@/types/comment';
 
 const COMMENTS_COLLECTION = 'comments';
+const ARTICLES_COLLECTION = 'articles';
 
 export const CommentService = {
   // Récupérer tous les commentaires
@@ -176,7 +177,26 @@ export const CommentService = {
 
   // Approuver un commentaire
   approveComment: async (id: string): Promise<void> => {
-    return CommentService.updateCommentStatus(id, CommentStatus.APPROVED);
+    try {
+      // Récupérer le commentaire pour obtenir l'articleId
+      const comment = await CommentService.getCommentById(id);
+      if (!comment) {
+        throw new Error(`Comment with ID ${id} not found`);
+      }
+
+      // Mettre à jour le statut du commentaire
+      await CommentService.updateCommentStatus(id, CommentStatus.APPROVED);
+      
+      // Incrémenter le nombre de commentaires de l'article
+      const articleRef = doc(db, ARTICLES_COLLECTION, comment.articleId);
+      await updateDoc(articleRef, {
+        commentCount: increment(1),
+        updatedAt: Timestamp.now()
+      });
+    } catch (error) {
+      console.error(`Error approving comment ${id}:`, error);
+      throw error;
+    }
   },
 
   // Rejeter un commentaire
