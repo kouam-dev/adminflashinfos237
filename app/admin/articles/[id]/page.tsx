@@ -27,10 +27,10 @@ const ArticleForm = () => {
   
   // Récupérer l'utilisateur connecté depuis le store Redux
   const { user } = useAppSelector((state) => state.auth);
-
+  
   // Déterminer les droits en fonction du rôle
-    const isAdmin = user?.role === UserRole.ADMIN;
-    const isAuthor = user?.role === UserRole.AUTHOR;
+  const isAdmin = user?.role === UserRole.ADMIN;
+  const isAuthor = user?.role === UserRole.AUTHOR;
     // const isEditor = user?.role === UserRole.EDITOR;
   
   const [formData, setFormData] = useState<ArticleFormData>({
@@ -44,6 +44,7 @@ const ArticleForm = () => {
     authorName: user?.displayName || '', // Initialiser avec le nom de l'utilisateur connecté
     categoryIds: [],
     tags: [],
+    keywords: [],
     status: ArticleStatus.DRAFT,
     featured: false,
     sources: []
@@ -59,6 +60,7 @@ const ArticleForm = () => {
   const [sourceNameInput, setSourceNameInput] = useState('');
   const [sourceUrlInput, setSourceUrlInput] = useState('');
   const [saving, setSaving] = useState(false)
+  const [keywordInput, setKeywordInput] = useState('');
   
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -94,6 +96,7 @@ const ArticleForm = () => {
                 authorName: article.authorName || '',
                 categoryIds: article.categoryIds || [],
                 tags: article.tags || [],
+                keywords: article.keywords || [],
                 status: article.status || ArticleStatus.DRAFT,
                 featured: article.featured || false,
                 sources: article.sources || []
@@ -125,6 +128,22 @@ const ArticleForm = () => {
     fetchData();
   }, [id, isNewArticle]);
 
+  const addKeyword = () => {
+    if (keywordInput.trim() && !formData.keywords.includes(keywordInput.trim())) {
+      setFormData(prev => ({
+        ...prev,
+        keywords: [...prev.keywords, keywordInput.trim()]
+      }));
+      setKeywordInput('');
+    }
+  };
+  
+  const removeKeyword = (keyword: string) => {
+    setFormData(prev => ({
+      ...prev,
+      keywords: prev.keywords.filter(k => k !== keyword)
+    }));
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     
@@ -555,6 +574,42 @@ const ArticleForm = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+        <div>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Mots-clés
+          </label>
+          <div className="flex items-center mb-2">
+            <input
+              type="text"
+              value={keywordInput}
+              onChange={(e) => setKeywordInput(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addKeyword())}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Ajouter un mot-clé"
+            />
+            <button
+              type="button"
+              onClick={addKeyword}
+              className="ml-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded"
+            >
+              +
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {formData.keywords.map((keyword, index) => (
+              <div key={index} className="bg-gray-200 px-3 py-1 rounded-full flex items-center">
+                <span>{keyword}</span>
+                <button
+                  type="button"
+                  onClick={() => removeKeyword(keyword)}
+                  className="ml-1 text-gray-600 hover:text-gray-800"
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
           </div>
         </div>
 
